@@ -11,10 +11,30 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
-  username    String   @unique
-  password    String
+  id         Int      @id @default(autoincrement())
+  username   String   @unique
+  password   String
   ethAddress String   @unique
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  Ledger     Ledger[]
+}
+
+model Ledger {
+  id             Int          @id @default(autoincrement())
+  user           User         @relation(fields: [userEthAddress], references: [ethAddress])
+  userEthAddress String
+  token          Token
+  action         LedgerAction
+  amount         Decimal
+  createdAt      DateTime     @default(now())
+}
+
+enum Token {
+  ETHEREUM
+  USDC
+}
+
+enum LedgerAction {
+  DEPOSIT
 }

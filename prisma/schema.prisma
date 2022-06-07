@@ -25,16 +25,12 @@ model Ledger {
   user           User         @relation(fields: [userEthAddress], references: [ethAddress])
   userEthAddress String
   token          Token
-  action         LedgerAction
   amount         Decimal
+  balance        Decimal
   createdAt      DateTime     @default(now())
 }
 
 enum Token {
   ETHEREUM
   USDC
-}
-
-enum LedgerAction {
-  DEPOSIT
 }

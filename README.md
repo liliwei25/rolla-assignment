@@ -59,6 +59,22 @@ Response:
 }
 ```
 
+### Exchange
+```
+GET /user/balance/:token
+
+Supported tokens: USDC, ETHEREUM
+
+Headers:
+{
+    Authorization: Bearer token
+}
+
+Response:
+balance: string;
+```
+
+
 ### Auth
 ```
 POST /auth/login
@@ -72,44 +88,5 @@ Params:
 Response:
 {
     accessToken: string
-}
-```
-
-### Exchange
-```
-GET /exchange/balance/:token
-
-Supported tokens: USDC, ETHEREUM
-
-Headers:
-{
-    Authorization: Bearer token
-}
-
-Response:
-{
-  token: Token;
-  balance: number;
-}
-```
-
-```
-POST /exchange/deposit
-
-Params:
-{
-  "token": "USDC" | "ETHEREUM",
-  "amount": number
-}
-
-Headers:
-{
-    Authorization: Bearer token
-}
-
-Response:
-{
-  token: Token;
-  balance: number;
 }
 ```

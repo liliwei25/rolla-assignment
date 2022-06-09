@@ -7,12 +7,17 @@ import {
   UseGuards,
   ConflictException,
   BadRequestException,
+  UsePipes,
+  Param,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserCreateInput } from './models/UserCreateInput';
 import { UserResponse } from './models/UserResponse';
 import { Web3Service } from '../web3/web3.service';
 import { JwtGuard } from '../auth/jwt.guard';
+import { TokenValidationPipe } from '../pipes/token-validation.pipe';
+import {Token} from "../web3/TokenEnum";
 
 const ERROR_USER_ALREADY_EXISTS = 'User already exists';
 const ERROR_MISSING_CREATE_PARAMS = 'Missing username or password';
@@ -41,5 +46,15 @@ export class UserController {
   @Get('profile')
   async getUser(@Request() req): Promise<UserResponse> {
     return req.user;
+  }
+
+  @UseGuards(JwtGuard)
+  @UsePipes(TokenValidationPipe)
+  @Get('balance/:token')
+  async getUserBalance(@Request() req, @Param() token: Token): Promise<string> {
+    if (!req.user) {
+      throw new UnauthorizedException();
+    }
+    return this.web3Service.getBalance(req.user.ethAddress, token);
   }
 }

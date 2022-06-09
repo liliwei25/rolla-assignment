@@ -4,7 +4,7 @@ import {
   ArgumentMetadata,
   BadRequestException,
 } from '@nestjs/common';
-import { Token } from '@prisma/client';
+import { Token } from '../web3/TokenEnum';
 
 const ERROR_INVALID_TOKEN = 'Invalid Token';
 

@@ -6,8 +6,6 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { Web3Module } from './web3/web3.module';
-import { LedgerModule } from './ledger/ledger.module';
-import { ExchangeModule } from './exchange/exchange.module';
 
 @Module({
   imports: [
@@ -16,8 +14,6 @@ import { ExchangeModule } from './exchange/exchange.module';
     AuthModule,
     UserModule,
     Web3Module,
-    LedgerModule,
-    ExchangeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

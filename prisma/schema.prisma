@@ -17,20 +17,4 @@ model User {
   ethAddress String   @unique
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  Ledger     Ledger[]
-}
-
-model Ledger {
-  id             Int          @id @default(autoincrement())
-  user           User         @relation(fields: [userEthAddress], references: [ethAddress])
-  userEthAddress String
-  token          Token
-  amount         Decimal
-  balance        Decimal
-  createdAt      DateTime     @default(now())
-}
-
-enum Token {
-  ETHEREUM
-  USDC
 }
